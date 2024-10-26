@@ -1,0 +1,51 @@
+TypeScript メモ
+
+学習は以下のサイトで進めている。
+https://typescriptbook.jp/
+
+・https://learn.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-windows
+　上記サイトを参考にしてWindowsにNode.jsをインストール。
+
+・Node.jsでファイルを実行するには、ターミナルでファイルがある場所に移動して node app.js のようにコマンドを実行するだけ。
+
+・アロー関数とは、関数リテラルをシンプルに記述する方法のこと。
+　参考サイト:https://qiita.com/may88seiji/items/4a49c7c78b55d75d693b
+
+・useStateは、コンポーネント内で「状態」を扱うための関数の1つ。
+　参考サイト:https://qiita.com/KokiSakano/items/c16a8daf03acdbd6c911
+
+・Promiseとは、非同期処理の結果を成功(resolve)または失敗(reject)で返すオブジェクトである。
+　Promiseを使用すると、失敗の処理を分岐したり、複数の非同期処理を順番に実行したり、並行して実行することができる。
+　Promiseはthen()メソッドを使って、複数の処理をつなぎ順番に実行することができる。
+　参考サイト:https://qiita.com/saka212/items/9b6cfe06b464580c2ee6
+
+・Jestで関数をテストする際は、functionの前にexportを記述して関数をエクスポートする必要がある。
+
+・基本的なテストコードは以下のような形で記述する。
+
+    const result = isZero(0);
+    expect(result).toBe(true);
+
+　上記の場合、isZero()メソッドに0を渡した場合は、trueが想定されるといったテストコードである。
+　toBe()マッチャーは、JavaScriptの厳密等価比較(===)と同じであるため、expect(result).toBe(true)は内部的に
+　result === true かを評価する。
+　マッチャーの種類については以下サイトを参照。
+　https://jestjs.io/ja/docs/expect
+
+・
+
+　から
+
+================================================================================================================================
+
+エラーやミス、わからなかったことなど
+
+・npm install -g typescript を実行した後に、tsc -v とすると、
+　「スクリプトの実行が許可されていない」といった旨のエラーが出て、確認ができない。
+　　→ 原因は、powershellのスクリプト実行ポリシーがRestrictになっていることだった。
+　　　実行ポリシーとは、powershellが構成ファイルを読み込み、スクリプトを実行する条件を制御する安全機能のこと。
+　　　管理者権限でpowershellを開き、Set-WxecutionPolicy RemoteSigned を実行し、RemoteSignedにすることで解決。
+　　　参考サイト:https://qiita.com/naopin708/items/0cbffce4fef6f4eca50f
+　　　Windowsの実行ポリシーについて:https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4
+
+・
