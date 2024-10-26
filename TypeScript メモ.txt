@@ -19,7 +19,8 @@ https://typescriptbook.jp/
 　Promiseはthen()メソッドを使って、複数の処理をつなぎ順番に実行することができる。
 　参考サイト:https://qiita.com/saka212/items/9b6cfe06b464580c2ee6
 
-・Jestで関数をテストする際は、functionの前にexportを記述して関数をエクスポートする必要がある。
+・Jestで関数をテストする際は、functionの前にexportを記述して関数をエクスポートし、
+　テストファイルでその関数をインポートする必要がある。
 
 ・基本的なテストコードは以下のような形で記述する。
 
@@ -32,9 +33,21 @@ https://typescriptbook.jp/
 　マッチャーの種類については以下サイトを参照。
 　https://jestjs.io/ja/docs/expect
 
+・コードを整形する際は、prettierを使用するのが便利。
+　インストールしたら yarn prettier --write 対象ディレクトリ/ファイル で整形することができる。
+　.pretterrcファイルをルートに作成し、そこにルールを書き込める。
+
+・ESLintでコードが設定した規約に反しているかどうかをチェックできる。
+　ESLintのrulesに指定するルールは以下サイトを参照。no-console,camelcase,semi などがある。
+　https://eslint.org/docs/latest/rules/
+
+・ESLintではTypeScriptはチェックできないため、TypeScriptESLintを用いる必要がある。
+　TypeScriptESLintにはESLintの200以上のルールに加え、100以上のルールが追加される。
+　https://typescript-eslint.io/rules/
+
 ・
 
-　から
+読んで学ぶTypeScript　から
 
 ================================================================================================================================
 
@@ -47,5 +60,20 @@ https://typescriptbook.jp/
 　　　管理者権限でpowershellを開き、Set-WxecutionPolicy RemoteSigned を実行し、RemoteSignedにすることで解決。
 　　　参考サイト:https://qiita.com/naopin708/items/0cbffce4fef6f4eca50f
 　　　Windowsの実行ポリシーについて:https://learn.microsoft.com/ja-jp/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-7.4
+
+・「Reactコンポーネントのテストを書こう」にて、testing-libraryをインストールするため以下のコマンドを実行した。
+
+    yarn add \
+    @testing-library/react@14 \
+    @testing-library/jest-dom@5 \
+    @testing-library/user-event@14
+
+　すると、「Error: EPERM: operation not permitted, lstat 'C:\Config.Msi'」や
+　「Error: EBUSY: resource busy or locked, lstat 'C:\DumpStack.log.tmp'」のエラーが出てインストールができない。
+　　→ 原因は、改行を示すバックスラッシュをそのままコマンドに組み込んでいたことだった。
+　　　1つずつインストールしていくことで今回は無事インストールできたが、上記で実行したコマンドからバックスラッシュを無くせば、
+　　　普通に実行されたと思われる。つまり、以下の形。
+　　　yarn add @testing-library/react@14 @testing-library/jest-dom@5 @testing-library/user-event@14
+　　　慣れていないコマンドのため、バックスラッシュを用いたこういう記法なのだと思い込んでしまっていたのが悪かった。
 
 ・
