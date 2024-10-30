@@ -69,8 +69,7 @@ function print() {
     console.log(x); // 2
 }
 print();
-// varで宣言された変数のスコープは「関数」となるため、
-// 上記のように{}の中で変数宣言をしても最初に定義した変数xに上書きされる。
+// varで宣言された変数のスコープは「関数」
 function print2() {
     const x = 1;
     if (true) {
