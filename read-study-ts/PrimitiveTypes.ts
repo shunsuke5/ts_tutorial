@@ -2,24 +2,13 @@
  * プリミティブ型
  */
 
-// JavaScriptのプリミティブ型の1つ目の特徴は、値を直接変更できない点。
-// つまりイミュータブルであるということ。
-// 2つ目の特徴は、基本的にプロパティが無い点。
-// プリミティブ型のnullとundefinedにはプロパティが無い。
-// null.toString();    // エラー
 
-// ところが、文字列や数値などのプリミティブ型は、プロパティを持ったオブジェクトとして扱える。
-// 以下のように、プリミティブ型をまるでオブジェクトのように扱えるのはJavaScriptの特徴である。
-// JavaScriptにはプリミティブ型をオブジェクトに自動変換する機能があり、これを「オートボクシング」、自動ボックス化と呼ぶ。
 console.log("name".length);      // 4
 
 /**
  * プリミティブ型の種類
  */
 
-// boolean,number,string,undefined,null,symbol,bigint の7つがある。
-// 上記のプリミティブ型以外は、JavaScriptにおいてはすべてオブジェクトと考えて問題ない。
-// 配列や正規表現オブジェクトなどもすべてオブジェクトである。
 
 /**
  * boolean型
@@ -32,17 +21,13 @@ const isPanda = false;
  * number型
  */
 
-// JavaScriptのnumber型は、1,-1などの整数と0.1などの小数を含めた数値の型である。
-// JavaScriptには整数と小数を型レベルで区別する物は無く、どちらもnumber型で表現する。
 123
 -123
 20.315
 
-// 小数は小数点から始める書き方ができ、整数は小数点で終わる書き方ができる
 0.1 === .1
 5.0 === 5.
 
-// 2,8,16進数の表記も可能。それぞれ表現したい数値の前に0b,0o,0xをつける。
 0b1010
 0o755
 0xfff
@@ -50,37 +35,19 @@ const isPanda = false;
 // JavaScriptの数値リテラルは可読性のために _ で区切って書くことができる。区切る桁数は自由。
 100_000_000
 
-// ただし、_ を先頭や末尾、小数点の前後、連続で2個以上置くことはできない。
-// _100
-// 100_
-// 100_.0
-// 100._0
-// 1__00
-
-// JavaScriptの数値リテラルのプロパティを直接参照する場合、
-// 小数点のドットとプロパティアクセッサーのドットが区別できないため、構文エラーとなる。
-// 5.toString();
-
-// これを回避するには、ドットを2つ続けるか、数値を括弧で囲む必要がある。
 5..toString();
 (5).toString();
 
 const count: number = 123;  // TypeScriptでの型注釈はnumberを用いる。
-// Number型もあるが、これとnumber型は別物なので注意。
-
-// JavaScriptのnumber型は、IEEE 754の倍精度浮動小数である。
-// 64ビットの内、52ビットが数値の格納に、11ビットが少数の位置に、1ビットが政府符号に使われる。
-// 正確に扱える数値は-(2^53 - 1) から 2^53 - 1 の間。
-// 整数については、他言語の64ビット整数型の範囲より狭いため注意する。
 
 /**
  * NaN(Not a Number)
  */
 const price = parseInt("百円");
 console.log(price); // NaN
-if(Number.isNaN(price)) {
-    console.log("数値化できません");
-}
+// if(Number.isNaN(price)) {
+//     console.log("数値化できません");
+// }
 // console.log(NaN === NaN);   // 常にfalse
 
 // 1を0で割った場合、Infinity(無限大)となる。
@@ -90,11 +57,112 @@ if(Number.isNaN(price)) {
  */
 console.log(0.1 + 0.2 === 0.3);     // false
 console.log(0.5 + 0.25 === 0.75);   // true
-// このような誤差が発生してしまうのは、
-// 例えば10進数の0.2は有限小数だが、それを2進数で表すと0.0011...のような循環小数になる。
-// IEEE 754が扱う小数点以下は有限のため、循環小数は桁の途中で切り捨てられる。
-// その結果、少数の計算に誤差が生じてしまう。
-// 2進数で有限小数になる0.25,0.5,0.75などの数値だけを扱う計算は誤差なく計算できる。
 
+// 一度整数に桁上げして計算することで誤差を無くす方法
 console.log(110 * 1.1); // 121.00000000000001
-console.log((110 * 11) / 10 === 121);
+console.log((110 * 11) / 10 === 121);   // true
+
+// ただし、桁を戻した数値が小数になることがあるため注意
+const price1 = (101 * 11) / 10; // 111.1
+const price2 = (103 * 11) / 10; // 113.3
+console.log(price1 + price2);   // 224.39999999999998
+
+/**
+ * string型
+ */
+{
+"Hello";
+'Hello';
+`Hello`;
+
+console.log(`実際に改行を
+    してみる`);
+
+const count = 10;
+console.log(`現在、${count}名が観ています。`);
+console.log(`税込み${Math.floor(100 * 1.1)}円`);
+
+const message: string = "Hello";
+"hello" + "world";
+}
+
+/**
+ * null型
+ */
+{
+    const x = null;
+    const x2: null = null;
+    console.log(typeof null);
+}
+
+/**
+ * undefined型
+ */
+{
+    let name;
+    console.log(name);      // undefined
+    function func() {}      // 戻り値が無い関数
+    console.log(func());    // undefined(func()の戻り値)
+    const obj = {};
+    // console.log(obj.name);
+    // const arr = [];
+    // console.log(arr[1]);
+
+    const x: undefined = undefined;
+}
+
+/**
+ * undefinedとnullの違い
+ */
+console.log("undefinedとnullの違い");
+{
+    let value;
+    console.log(value);
+
+    console.log(typeof undefined);  // undefined
+    console.log(typeof null);       // object
+
+    console.log(JSON.stringify({ foo: undefined }));    // {}
+    console.log(JSON.stringify({ foo: null })); // {"foo":null}
+}
+
+console.log("symbol型")
+{
+    const s1: Symbol = Symbol("foo");
+    const s2: Symbol = Symbol("foo");
+    console.log(s1 === s1); // true
+    console.log(s1 === s2); // false
+
+    console.log(JSON.stringify(Symbol("many")));    // undefined
+    console.log(                // {"y":"hello"}
+        JSON.stringify({
+            x: Symbol("many"),  // symbol型をプロパティに含むキーは消滅する
+            y: "hello",
+        })
+    );
+    console.log(                // {"y":"hello"}
+        JSON.stringify({
+            [Symbol("many")]: "hello",  // symbol型をキーに含むキーは消滅する
+            y: "hello",
+        })
+    );
+}
+
+console.log("bigint型(長整数型)")
+{
+    const x = 100n;
+    const x2: bigint = 100n;
+    const x3 = BigInt(100);
+    const y = BigInt("9007199254740991");
+    console.log(x);
+    console.log(x2);
+    console.log(x3);
+    console.log(y);
+
+    // 2n + 3; // エラー
+    const i = 2n + BigInt(3);
+    console.log(i);
+
+    // console.log(JSON.stringify(12n));   // biging型を直接JSON.stringify()に渡すとエラー
+    console.log(JSON.stringify({ x: 12n }));    // bigint型を含むオブジェクトを渡してもエラー
+}
