@@ -388,5 +388,32 @@ console.log("\nオプショナルチェーン");
 
 console.log("\nオブジェクトをループする方法");
 {
-
+    console.log("for-in文");
+    {
+        const foo = { a: 1, b: 2, c: 3 };
+        for(const prop in foo) {
+            console.log(prop, foo[prop as keyof typeof foo]);  // a 1,b 2,c 3
+        }
+    }
+    console.log("Object.entries");
+    {
+        const foo = { a: 1, b: 2, c: 3 };
+        for(const [key, value] of Object.entries(foo)) {    // オブジェクトを配列に変換する
+            console.log(key, value);    // a 1,b 2,c 3
+        }
+    }
+    console.log("Object.keys")
+    {
+        const foo = { a: 1, b: 2, c: 3 };
+        for(const key of Object.keys(foo)) {    // キーだけ反復処理したい場合に便利
+            console.log(key);   // a,b,c
+        }
+    }
+    console.log("Object.values");
+    {
+        const foo = { a: 1, b: 2, c: 3 };
+        for(const value of Object.values(foo)) {    // プロパティの値だけを反復処理する場合に便利
+            console.log(value); // 1,2,3
+        }
+    }
 }

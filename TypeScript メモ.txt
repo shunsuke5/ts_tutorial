@@ -64,9 +64,15 @@ https://typescriptbook.jp/
 ・ts-nodeをインストールした。
 　https://tomosta.jp/2024/01/ts-node/
 
+・npm installコマンドに --save-dev オプションをつけると、package.jsonの dependencies ではなく、devDependencies に追記される。
+　devDependenciesに記載されているパッケージは、git cloneでクローンした後、必要なパッケージをインストールする際に実行する
+　npm install --production コマンドでインストールされない。
+　https://qiita.com/kohecchi/items/092fcbc490a249a2d05c
+　https://zenn.dev/hrkmtsmt/articles/5f4a0e5c79b77a
+
 ・
 
-　から
+構造的型付け　モックテストの簡略化　Jestをインストールするところ　から
 
 ================================================================================================================================
 
@@ -109,5 +115,14 @@ https://typescriptbook.jp/
 　　　調べてみるとtscコマンドでファイルを指定すると、tsconfig.jsonファイルは無視されるらしい。
 　　　https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 　　　そのため、tsconfig.jsonのlibにes2016,domと指定したうえで tsc で一括コンパイルした。
+
+・for-in文内で foo[prop] のように記述すると、「TS7053: Element implicitly has an 'any' type because expression of type 'string'
+　can't be used to index type '{ a: number; b: number; c: number; }'. No index signature with a parameter of type 'string'
+　was found on type '{ a: number; b: number; c: number; }'.」のエラーが出る。
+　　→ 原因は、fooオブジェクトのプロパティに対する型安全性のチェック。TypeScriptはfooのプロパティがstring型でインデックス指定できるとは
+　　　認識していないためエラーが発生するとのこと(chatgpt)、なぜ認識できないのか？foo["a"]だとエラーは出ない。
+　　　foo[prop as keyof typeof foo] とすることで解決。
+　　　他にも、interface Fooにインデックス型を用いたり、Object.keys(foo) as (keyof typeof foo)[]を用いる方法もあるらしい。
+　　　https://qiita.com/hisashisatake@github/items/0ed17b1f6b2c0108be59
 
 ・
