@@ -41,36 +41,58 @@ console.log("構造的型付け");
         const rectangle = new Rectangle(5,8);
         console.log(totalArea(circle, rectangle));
     }
-    console.log("モックテストの簡略化");
-    {
-        type User = { id: number; name: string };
-        class UserApi {
-            async getUser(id: number): Promise<User | undefined> {
-                return undefined;
-            }
-        }
-        class UserService {
-            private api: UserApi;
-            constructor(api: UserApi) {
-                this.api = api;
-            }
-            async userExists(id: number): Promise<boolean> {
-                const user = await this.api.getUser(id);
-                return user !== undefined;
-            }
-        }
-        // TODO: Jestをローカルインストールして単体テストをしてみる
-        test("ユーザーがいる時はtrueを返す", async () => {
-            // モックオブジェクトを直接作成
-            const api: UserApi = {
-                async getUser(id) {
-                    return { id, name: "Alice" };
-                }
-            };
-            // モックオブジェクトをUserServiceに渡してテスト
-            const service = new UserService(api);
-            const result = await service.userExists(123);
-            expect(result).toBe(true);
-        });
+}
+console.log("モックテストの簡略化");
+type User = { id: number; name: string };
+export class UserApi {
+    async getUser(id: number): Promise<User | undefined> {
+        return undefined;
     }
+}
+export class UserService {
+    private api: UserApi;
+    constructor(api: UserApi) {
+        this.api = api;
+    }
+    async userExists(id: number): Promise<boolean> {
+        const user = await this.api.getUser(id);
+        return user !== undefined;
+    }
+}
+console.log("privateメンバーを持つクラス");
+{
+    // TypeScriptではprivateメンバーを持つクラスは構造的型付けから区別される
+    class UserId {
+        private id: string;
+        constructor(id: string) {
+            this.id = id;
+        }
+        getId(): string {
+            return this.id;
+        }
+    }
+    class ProductId {
+        private id: string;
+        constructor(id: string) {
+            this.id = id;
+        }
+        getId(): string {
+            return this.id;
+        }
+    }
+    const userId: UserId = new UserId("1");
+    // const productId: ProductId = userId;    // エラー
+}
+console.log("ブランド型");
+{
+    interface UserId {
+        __brand: "UserId";
+        id: number;
+    }
+    interface ProductId {
+        __brand: "ProductId";
+        id: number;
+    }
+    const userId = { id: 1 } as UserId;
+    // const productId: ProductId = userId;    // 代入不可
 }
