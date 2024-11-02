@@ -24,3 +24,14 @@ console.log("for-in文ではhasOwnPropertyを使おう");
         }
     }
 }
+console.log("\n配列要素へのアクセス");
+{
+    const abc = ["a", "b", "c"];
+    console.log(abc[100]);
+}
+console.log("\n配列の分割代入");
+{
+    const oneToFive = [1, 2];
+    const [one, two, three] = oneToFive;
+    console.log(one, two, three);
+}

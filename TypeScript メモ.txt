@@ -70,9 +70,18 @@ https://typescriptbook.jp/
 　https://qiita.com/kohecchi/items/092fcbc490a249a2d05c
 　https://zenn.dev/hrkmtsmt/articles/5f4a0e5c79b77a
 
+・jest,ts-jest,@types/jestをインストールし、構造的型付けのモックテストの簡略化をテストしてみた。
+　テスト構成などは1つ目のサイト、ts-jestで認識させる方法は2つ目のサイトを参照。
+　https://qiita.com/okazuki/items/991a068892e946531612
+　https://qiita.com/mktu/items/d36416baba155dfecc00
+
+・npm(node package manager)はパッケージの管理ツール、
+　npx(node package executer)はローカルインストールしたコマンドを実行するために使用するツールである。
+　https://qiita.com/kohta9521/items/ee3ed4a2360add80ad79
+
 ・
 
-構造的型付け　モックテストの簡略化　Jestをインストールするところ　から
+配列の共変性　から
 
 ================================================================================================================================
 
