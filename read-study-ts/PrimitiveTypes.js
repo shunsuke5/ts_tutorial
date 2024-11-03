@@ -128,4 +128,9 @@ console.log("bigint型(長整数型)");
     console.log(x2);
     console.log(x3);
     console.log(y);
+    // 2n + 3; // エラー
+    const i = 2n + BigInt(3);
+    console.log(i);
+    // console.log(JSON.stringify(12n));   // biging型を直接JSON.stringify()に渡すとエラー
+    console.log(JSON.stringify({ x: 12n })); // bigint型を含むオブジェクトを渡してもエラー
 }
