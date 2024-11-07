@@ -35,3 +35,24 @@ console.log("\n配列の分割代入");
     const [one, two, three] = oneToFive;
     console.log(one, two, three);
 }
+console.log("\n等価であるということ");
+{
+    console.log(0 === 0n);      // false
+    console.log(0 == 0n);       // true
+    console.log(0 === false);   // false
+    console.log(0 == false);    // true
+    console.log(0 === "0");     // false
+    console.log(0 == "0");      // true
+    console.log(0 === "");      // false
+    console.log(0 == "");       // true
+
+    // NaNはどの値と比較してもfalse
+    console.log(NaN === NaN);   // false
+    console.log(NaN == NaN);   // false
+
+    console.log({} == {});  // false
+    console.log({} === {}); // false
+    console.log({ age: 18 } == { age: 18 });    // false
+    const obj = { hair: "blond" };
+    console.log(obj === obj);   // true
+}
