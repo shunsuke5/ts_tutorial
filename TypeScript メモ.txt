@@ -134,4 +134,9 @@ https://typescriptbook.jp/
 　　　他にも、interface Fooにインデックス型を用いたり、Object.keys(foo) as (keyof typeof foo)[]を用いる方法もあるらしい。
 　　　https://qiita.com/hisashisatake@github/items/0ed17b1f6b2c0108be59
 
+・ts-nodeを実行すると、なぜか最後に undefined が表示される
+　　→ 原因は、関数の戻り値を指定していなかったこと。そのため、function a() { console.log("a"); } のような関数を
+　　　console.log(a()); のような形で呼び出すと、戻り値が無いためundefinedが表示されていた。
+　　　戻り値をreturn文で明確に指定する事で解決。
+
 ・
