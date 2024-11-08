@@ -51,8 +51,17 @@ console.log("\n等価であるということ");
     console.log(NaN == NaN);   // false
 
     console.log({} == {});  // false
-    console.log({} === {}); // false
+    // console.log({} === {}); // false
     console.log({ age: 18 } == { age: 18 });    // false
     const obj = { hair: "blond" };
     console.log(obj === obj);   // true
+}
+console.log("変数のスコープ");
+{
+    // 意図しないグローバル変数への代入
+    function func() {
+        foo = "ローカル変数のつもり";
+    }
+    func();
+    console.log(window.foo);    // "ローカル変数のつもり"が表示される
 }
