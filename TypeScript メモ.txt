@@ -79,6 +79,15 @@ https://typescriptbook.jp/
 　npx(node package executer)はローカルインストールしたコマンドを実行するために使用するツールである。
 　https://qiita.com/kohta9521/items/ee3ed4a2360add80ad79
 
+・網羅性チェックを例外にすると、noUnusedLocalsを有効にした際でも未使用変数についてのコンパイルエラーが発生しない。
+　また、実行後のJavaScriptのコードで見た時に、例外による網羅性チェックの方が可読性が高い。
+
+・typescriptの is は、ユーザー定義型ガード関数で使われる。typeofでの型の絞り込みは関数スコープで完結してしまうため、
+　if(isString(value)) { ... } のようにしても、ユーザー定義したisString()型ガード関数がtrueな場合でも、
+　valueはunknown型として推論されてしまう。そこで、isString()の定義を function isString(value: unknown): value is string {} のようにすると、
+　isString()の結果がtrueであった場合に引数で受け取った変数の型はstring型であるとコンパイラに教えることができる。
+　https://qiita.com/ryo2132/items/ce9e13899e45dcfaff9b
+
 ・
 
 never型　から
