@@ -107,4 +107,24 @@ console.log("従来の関数とアロー関数の違い");
     // アロー関数はコンストラクタになれない
     const Dog = (name) => {};
     // const dog = new Dog("ポチ");    // TypeError: Dog is not a constructor
+
+    console.log("thisの指すもの");
+    {
+        function showThis() {
+            console.log(this);  // thisがさすのはグローバルオブジェクト = Windowsオブジェクト
+        }
+        showThis();
+
+        const foo = { name: "Foo" };
+        foo.showThis = showThis;
+        // メソッド呼び出しの場合、thisが指す値はメソッドが紐づくオブジェクトになる
+        foo.showThis(); // { name: 'Foo', showThis: [Function: showThis] }
+
+        // コンストラクタとして呼び出した場合、thisは生成中のオブジェクトを指す
+        function a() {
+            this.name = "a";
+            console.log(this);
+        }
+        new a();    // { name: 'a' }
+    }
 }
